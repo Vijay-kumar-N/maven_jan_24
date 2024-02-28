@@ -10,12 +10,28 @@ pipeline{
       }
     }
     
+    stage('Clean'){
+      steps{
+        sh '''
+          cd simple_maven_project
+          mvn clean
+        '''
+      }
+    }
+        
+    stage('Validate'){
+      steps{
+        sh '''
+          mvn validate
+        '''
+      }
+    }
+        
     stage('Build'){
       steps{
         sh '''
-          ls -lrt
           cd simple_maven_project
-          ls -lrt
+          mvn clean
         '''
       }
     }
