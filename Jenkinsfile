@@ -37,5 +37,59 @@ pipeline{
       }
     }
         
+    stage('Test'){
+      steps{
+        sh '''
+          cd simple_maven_project
+          mvn test
+        '''
+      }
+    }
+        
+    stage('Package'){
+      steps{
+        sh '''
+          cd simple_maven_project
+          mvn package
+        '''
+      }
+    }
+        
+    stage('Integration-test'){
+      steps{
+        sh '''
+          cd simple_maven_project
+          mvn integration-test
+        '''
+      }
+    }
+        
+    stage('Verify'){
+      steps{
+        sh '''
+          cd simple_maven_project
+          mvn verify
+        '''
+      }
+    }
+        
+    stage('Install'){
+      steps{
+        sh '''
+          cd simple_maven_project
+          mvn install
+        '''
+      }
+    }
+        
+    // stage('Deploy'){
+    //   steps{
+    //     sh '''
+    //       cd simple_maven_project
+    //       mvn deploy
+    //     '''
+    //   }
+    // }
+        
   }
 }
