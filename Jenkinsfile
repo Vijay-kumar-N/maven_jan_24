@@ -3,6 +3,10 @@ pipeline{
     label 'slave1'
   }
 
+  parameters{
+    booleanParam(name: 'CLEAN', defaultValue: true, description: 'Toggle this value')
+  }
+
   stages{
     stage('Checkout'){
       steps{
@@ -11,6 +15,11 @@ pipeline{
     }
     
     stage('Clean'){
+      when{
+        expression{
+          params.CLEAN == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
