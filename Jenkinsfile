@@ -22,6 +22,7 @@ pipeline{
     stage('Validate'){
       steps{
         sh '''
+          cd simple_maven_project
           mvn validate
         '''
       }
@@ -30,6 +31,7 @@ pipeline{
     stage('Compile'){
       steps{
         sh '''
+          cd simple_maven_project
           mvn compile
         '''
       }
