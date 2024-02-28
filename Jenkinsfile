@@ -27,11 +27,10 @@ pipeline{
       }
     }
         
-    stage('Build'){
+    stage('Compile'){
       steps{
         sh '''
-          cd simple_maven_project
-          mvn clean
+          mvn compile
         '''
       }
     }
