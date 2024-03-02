@@ -3,9 +3,17 @@ pipeline{
     label 'slave1'
   }
 
-  // parameters{
-  //   booleanParam(name: 'CLEAN', defaultValue: true, description: 'Toggle this value')
-  // }
+  parameters{
+    booleanParam(name: 'CLEAN', defaultValue: true, description: 'Toggle this value')
+    booleanParam(name: 'VALIDATE', defaultValue: true, description: 'Toggle this value')
+    booleanParam(name: 'COMPILE', defaultValue: true, description: 'Toggle this value')
+    booleanParam(name: 'TEST', defaultValue: true, description: 'Toggle this value')
+    booleanParam(name: 'PACKAGE', defaultValue: true, description: 'Toggle this value')
+    booleanParam(name: 'INTEGRATION_TEST', defaultValue: true, description: 'Toggle this value')
+    booleanParam(name: 'VERIFY', defaultValue: true, description: 'Toggle this value')
+    booleanParam(name: 'INSTALL', defaultValue: true, description: 'Toggle this value')
+    // booleanParam(name: 'DEPLOY', defaultValue: true, description: 'Toggle this value')
+  }
 
   stages{
     stage('Checkout'){
@@ -15,20 +23,25 @@ pipeline{
     }
     
     stage('Clean'){
-      // when{
-      //   expression{
-      //     params.CLEAN == true
-      //   }
-      // }
+      when{
+        expression{
+          params.CLEAN == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
-          mvn clean
+          mvn clean   
         '''
       }
     }
         
     stage('Validate'){
+      when{
+        expression{
+          params.VALIDATE == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
@@ -38,6 +51,11 @@ pipeline{
     }
         
     stage('Compile'){
+      when{
+        expression{
+          params.COMPILE == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
@@ -47,6 +65,11 @@ pipeline{
     }
         
     stage('Test'){
+      when{
+        expression{
+          params.TEST == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
@@ -56,6 +79,11 @@ pipeline{
     }
         
     stage('Package'){
+      when{
+        expression{
+          params.PACKAGE == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
@@ -65,6 +93,11 @@ pipeline{
     }
         
     stage('Integration-test'){
+      when{
+        expression{
+          params.INTEGRATION_TEST == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
@@ -74,6 +107,11 @@ pipeline{
     }
         
     stage('Verify'){
+      when{
+        expression{
+          params.VERIFY == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
@@ -83,6 +121,11 @@ pipeline{
     }
         
     stage('Install'){
+      when{
+        expression{
+          params.INSTALL == true
+        }
+      }
       steps{
         sh '''
           cd simple_maven_project
@@ -92,6 +135,11 @@ pipeline{
     }
         
     // stage('Deploy'){
+    //   when{
+    //     expression{
+    //       params.DEPLOY == true
+    //     }
+    //   }
     //   steps{
     //     sh '''
     //       cd simple_maven_project
